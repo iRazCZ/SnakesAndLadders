@@ -1,0 +1,1263 @@
+
+<!--  Game Title : Snakes & Ladders  -->
+
+<!--  Designed & Developed By Rameez Raza .A  -->
+
+<!--  Author E-Mail ID : rameez_osx@yahoo.com.au  -->
+
+<!--  Game Size : 117,357 Bytes (114 KB)  -->
+
+<!--  Screen Resolution (Best Viewable) : 1280 px x 1024 px  -->
+
+
+<html>
+
+
+<head>
+
+
+<title>
+Snakes & Ladders Game
+</title>
+
+
+<HTA:APPLICATION 
+     ID = "htaObj"
+     APPLICATOINNAME = "docjavascript"
+     BORDER = "none"
+     SHOWINTASKBAR = "yes"
+     SINGLEINSTANCE = "yes"
+     SYSMENU = "no"
+     WINDOWSTATE  = "maximize"
+     ICON="res://shell32.dll/2/230"
+>
+
+
+<script type="text/javascript">
+
+
+var flagA=false;
+var flagB=false;
+var flagC=false;
+var flagD=false;
+
+var w;
+var x;
+var y;
+var z;
+
+var turn;
+
+var count;
+var countA=0;
+var countB=0;
+var countC=0;
+var countD=0;
+
+var p;
+var q;
+var r=0;
+
+var def=1;
+
+var arrL=new Array(0,
+"330","400","470","540","610",0,"750","820",0,"960",
+"960","890","820","750","680","610","540",0,0,"330",
+0,"400","470","540","610","680","750",0,"890","960",
+"960","890","820","750","680","610","540","470","400","330",
+"330","400",0,"540","610","680","750","820",0,"960",
+0,"890","820","750","680",0,"540","470","400","330",
+"330","400","470","540",0,"680","750","820","890","960",
+"960",0,"820","750","680","610","540","470","400",0,
+"330","400","470","540","610","680","750",0,"890","960",
+"960",0,"820","750","680","610","540","470",0,"330");
+
+var arrT=new Array(0,
+"805","805","805","805","805",0,"805","805",0,"805",
+"750","750","750","750","750","750","750",0,0,"750",
+0,"700","700","700","700","700","700",0,"700","700",
+"645","645","645","645","645","645","645","645","645","645",
+"590","590",0,"590","590","590","590","590",0,"590",
+0,"540","540","540","540",0,"540","540","540","540",
+"485","485","485","485",0,"485","485","485","485","485",
+"430",0,"430","430","430","430","430","430","430",0,
+"380","380","380","380","380","380","380",0,"380","380",
+"325",0,"325","325","325","325","325","325",0,"325");
+
+
+function scrollit(seed)
+ {
+
+var m1 = "Designed & Developed by A.Rameez Raza";
+var m2 = " (rameez_osx@yahoo.com.au) .";
+var m3 = " All Rights Reserved .";
+var m4 = "";
+var msg=m1+m2+m3+m4;
+var out = " ";
+var c = 1;
+
+if (seed > 100)
+ {
+seed--;
+cmd="scrollit("+seed+")";
+timerTwo=window.setTimeout(cmd,100);
+}
+
+else 
+
+if (seed <= 100 && seed > 0)
+ {
+
+for (c=0 ; c < seed ; c++)
+{
+out+=" ";
+}
+
+out+=msg;
+seed--;
+window.status=out;
+cmd="scrollit("+seed+")";
+timerTwo=window.setTimeout(cmd,100);
+
+}
+
+else 
+
+if (seed <= 0)
+ {
+
+if (-seed < msg.length)
+ {
+out+=msg.substring(-seed,msg.length);
+seed--;
+window.status=out;
+cmd="scrollit("+seed+")";
+timerTwo=window.setTimeout(cmd,100);
+}
+
+else
+{
+window.status=" ";
+timerTwo=window.setTimeout("scrollit(100)",75);
+}
+
+}
+
+}
+
+
+function buttons()
+{
+
+if(n.value>=2 && n.value<=4)
+{
+
+count=n.value;
+
+if(count==3)
+{
+
+b1.style.display="";
+b2.style.display="";
+b3.style.display="";
+sl.style.display="";
+c1.style.display="";
+c2.style.display="";
+c3.style.display="";
+
+x=window.prompt("Enter the name of the Player 'A'", "");
+y=window.prompt("Enter the name of the Player 'B'", "");
+z=window.prompt("Enter the name of the Player 'C'", "");
+
+if((x==null)||(x==""))
+x="A";
+
+if((y==null)||(y==""))
+y="B";
+
+if((z==null)||(z==""))
+z="C";
+
+match.style.display="";
+match.innerHTML = x + "   (VS)   " + y + "   (VS)   " + z;
+
+}
+
+if(count==4)
+{
+
+b1.style.display="";
+b2.style.display="";
+b3.style.display="";
+b4.style.display="";
+sl.style.display="";
+c1.style.display="";
+c2.style.display="";
+c3.style.display="";
+c4.style.display="";
+
+w=window.prompt("Enter the name of the Player 'A'", "");
+x=window.prompt("Enter the name of the Player 'B'", "");
+y=window.prompt("Enter the name of the Player 'C'", "");
+z=window.prompt("Enter the name of the Player 'D'", "");
+
+if((w==null)||(w==""))
+w="A";
+
+if((x==null)||(x==""))
+x="B";
+
+if((y==null)||(y==""))
+y="C";
+
+if((z==null)||(z==""))
+z="D";
+
+match.style.display="";
+match.innerHTML = w + "   (VS)   " + x + "   (VS)   " + y + "   (VS)   " + z;
+
+}
+
+if(count==2)
+{
+
+b1.style.display="";
+b2.style.display="";
+sl.style.display="";
+c1.style.display="";
+c2.style.display="";
+
+x=window.prompt("Enter the name of the Player 'A'", "");
+y=window.prompt("Enter the name of the Player 'B'", "");
+
+if((x==null)||(x==""))
+x="A";
+
+if((y==null)||(y==""))
+y="B";
+
+match.style.display="";
+match.innerHTML = x + "   (VS)   " + y;
+
+}
+
+tos.style.display="";
+but.disabled="true";
+res.disabled="";
+n.disabled="true";
+
+}
+
+else
+{
+
+if(n.value=="")
+{
+alert("Please enter some value");
+resgame();
+}
+
+else
+{
+
+if(n.value<2 || n.value>4)
+{
+alert("Please enter the value not exceeds 4 and not below 2");
+resgame();
+}
+
+else
+{
+alert("Please enter the valid value");
+resgame();
+}
+
+}
+
+}
+
+}
+
+
+function resgame()
+{
+
+flagA=false;
+flagB=false;
+flagC=false;
+flagD=false;
+
+turn="";
+
+count=0;
+countA=0;
+countB=0;
+countC=0;
+countD=0;
+
+r=0;
+def=1;
+dc.src="0.gif";
+
+n.value=2;
+n.disabled="";
+but.disabled="";
+res.disabled="true";
+turns.innerHTML="";
+
+match.style.display="none";
+tos.style.display="none";
+rol.style.display="none";
+b1.style.display="none";
+b2.style.display="none";
+b3.style.display="none";
+b4.style.display="none";
+c1.style.display="none";
+c2.style.display="none";
+c3.style.display="none";
+c4.style.display="none";
+sl.style.display="none";
+brk.style.display="none";
+
+c1.style.left="50";
+c1.style.top="600";
+c2.style.left="50";
+c2.style.top="650";
+c3.style.left="50";
+c3.style.top="700";
+c4.style.left="50";
+c4.style.top="750";
+
+}
+
+
+function terminate()
+{
+
+resgame();
+alert("Thank You. Please Visit Again!!!");
+window.close();
+
+}
+
+
+function instruct()
+{
+
+var info1="1. Upto 4 Players can play.\n";
+var info2="2. Player who won the toss will be the initiator.\n";
+var info3="3. If the player finds the ladder, he will be shifted upwards to the top of the ladder & will be given the extra turn.\n";
+var info4="4. If the player finds the snake, he will be shifted downwards to the tail of the snake.\n";
+var info5="5. Player who first reaches the mark 100 is the winner.";
+
+alert(info1+info2+info3+info4+info5);
+
+}
+
+
+function rnd1()
+{
+dc.src="0.gif";
+window.setTimeout(rnd, 600);
+}
+
+
+function rnd()
+{
+
+var j=Math.random();
+var s=Math.floor((j*6+1));
+m.value=s;
+
+r=s;
+
+dc.src=s.toString()+".jpg";
+
+if(turn=="PA")
+playerA();
+
+else 
+if(turn=="PB")
+playerB(); 
+
+else 
+if(turn=="PC")
+playerC(); 
+
+else 
+if(turn=="PD")
+playerD();
+
+}
+
+
+function toss()
+{
+
+p=Math.random();
+
+if(count==2)
+{
+
+q=Math.floor((p*2+1));
+
+if(q==1)
+{
+alert("Player 'A' Wins!!!");
+turn="PA";
+flagA=true;
+playerA();
+}
+
+if(q==2)
+{
+alert("Player 'B' Wins!!!");
+turn="PB";
+flagB=true;
+playerB();
+}
+
+}
+
+if(count==3)
+{
+
+q=Math.floor((p*3+1));
+
+if(q==1)
+{
+alert("Player 'A' Wins!!!");
+turn="PA";
+flagA=true;
+playerA();
+}
+
+if(q==2)
+{
+alert("Player 'B' Wins!!!");
+turn="PB";
+flagB=true;
+playerB();
+}
+
+if(q==3)
+{
+alert("Player 'C' Wins!!!");
+turn="PC";
+flagC=true;
+playerC();
+}
+
+}
+
+if(count==4)
+{
+
+q=Math.floor((p*4+1));
+
+if(q==1)
+{
+alert("Player 'A' Wins!!!");
+turn="PA";
+flagA=true;
+playerA();
+}
+
+if(q==2)
+{
+alert("Player 'B' Wins!!!");
+turn="PB";
+flagB=true;
+playerB();
+}
+
+if(q==3)
+{
+alert("Player 'C' Wins!!!");
+turn="PC";
+flagC=true;
+playerC();
+}
+
+if(q==4)
+{
+alert("Player 'D' Wins!!!");
+turn="PD";
+flagD=true;
+playerD();
+}
+
+}
+
+}
+
+
+function playerA()
+{
+
+if(turn=="PA")
+turns.innerHTML="Player A's Turn!";
+
+if(flagA)
+{
+tos.style.display="none";
+rol.style.display="";
+m.value=0;
+c1.style.left=arrL[1];
+c1.style.top=arrT[1];
+flagA=false;
+countA=1;
+turn="PA";
+turns.innerHTML="Player A's Turn!";
+}
+
+else
+{
+
+countA=countA+r;
+
+if(countA>100)
+{
+countA=countA-r;
+}
+
+if(countA==6 || countA==9 || countA==19 || countA==21 || countA==28 || countA==51 || countA==72 || countA==80)
+{
+
+turn="PA";
+
+if(countA==6)
+countA=16;
+
+if(countA==9)
+countA=31;
+
+if(countA==19)
+countA=38;
+
+if(countA==21)
+countA=79;
+
+if(countA==28)
+countA=84;
+
+if(countA==51)
+countA=67;
+
+if(countA==72)
+countA=93;
+
+if(countA==80)
+countA=100;
+
+def=0;
+
+}
+
+if(countA==18 || countA==43 || countA==49 || countA==56 || countA==65 || countA==88 || countA==92 || countA==99)
+{
+
+if(countA==18)
+countA=5;
+
+if(countA==43)
+countA=23;
+
+if(countA==49)
+countA=33;
+
+if(countA==56)
+countA=26;
+
+if(countA==65)
+countA=57;
+
+if(countA==88)
+countA=53;
+
+if(countA==92)
+countA=71;
+
+if(countA==99)
+countA=35;
+
+def=1;
+
+} 
+
+if(count==2 && def==1)
+{
+c1.style.left=arrL[countA];
+c1.style.top=arrT[countA];
+turn="PB";
+turns.innerHTML="Player B's Turn!";
+}
+
+if(count==2 && def==0)
+{
+def=1;
+c1.style.left=arrL[countA];
+c1.style.top=arrT[countA];
+turn="PA";
+turns.innerHTML="Player A's Turn!";
+}
+
+if(count==3 && def==1)
+{
+c1.style.left=arrL[countA];
+c1.style.top=arrT[countA];
+turn="PB";
+turns.innerHTML="Player B's Turn!";
+}
+
+if(count==3 && def==0)
+{
+def=1;
+c1.style.left=arrL[countA];
+c1.style.top=arrT[countA];
+turn="PA";
+turns.innerHTML="Player A's Turn!";
+}
+
+if(count==4 && def==1)
+{
+c1.style.left=arrL[countA];
+c1.style.top=arrT[countA];
+turn="PB";
+turns.innerHTML="Player B's Turn!";
+}
+
+if(count==4 && def==0)
+{
+def=1;
+c1.style.left=arrL[countA];
+c1.style.top=arrT[countA];
+turn="PA";
+turns.innerHTML="Player A's Turn!";
+}
+
+r=0;
+
+if(countA==100)
+{
+turns.innerHTML="Player A Won The Game. Congrats!!! Player A.";
+alert("Congrats!!! You Win.");
+alert("Press 'F5' Or Click 'New Game' Button To Play A New Game.");
+rol.style.display="none";
+brk.style.display="";
+}
+
+}
+
+}
+
+
+function playerB()
+{
+
+if(turn=="PB")
+turns.innerHTML="Player B's Turn!";
+
+if(flagB)
+{
+tos.style.display="none";
+rol.style.display="";
+m.value=0;
+c2.style.left=arrL[1];
+c2.style.top=arrT[1];
+flagB=false;
+countB=1;
+turn="PB";
+turns.innerHTML="Player B's Turn!";
+}
+
+else
+{
+
+countB=countB+r;
+
+if(countB>100)
+{
+countB=countB-r;
+}
+
+if(countB==6 || countB==9 || countB==19 || countB==21 || countB==28 || countB==51 || countB==72 || countB==80)
+{
+
+if(countB==6)
+countB=16;
+
+if(countB==9)
+countB=31;
+
+if(countB==19)
+countB=38;
+
+if(countB==21)
+countB=79;
+
+if(countB==28)
+countB=84;
+
+if(countB==51)
+countB=67;
+
+if(countB==72)
+countB=93;
+
+if(countB==80)
+countB=100;
+
+turn="PB";
+def=0;
+
+}
+
+if(countB==18 || countB==43 || countB==49 || countB==56 || countB==65 || countB==88 || countB==92 || countB==99)
+{
+
+if(countB==18)
+countB=5;
+
+if(countB==43)
+countB=23;
+
+if(countB==49)
+countB=33;
+
+if(countB==56)
+countB=26;
+
+if(countB==65)
+countB=57;
+
+if(countB==88)
+countB=53;
+
+if(countB==92)
+countB=71;
+
+if(countB==99)
+countB=35;
+
+def=1;
+
+} 
+
+if(count==2 && def==1)
+{
+c2.style.left=arrL[countB];
+c2.style.top=arrT[countB];
+turn="PA";
+turns.innerHTML="Player A's Turn!";
+}
+
+if(count==2 && def==0)
+{
+def=1;
+c2.style.left=arrL[countB];
+c2.style.top=arrT[countB];
+turn="PB";
+turns.innerHTML="Player B's Turn!";
+}
+
+if(count==3 && def==1)
+{
+c2.style.left=arrL[countB];
+c2.style.top=arrT[countB];
+turn="PC";
+turns.innerHTML="Player C's Turn!";
+}
+
+if(count==3 && def==0)
+{
+def=1;
+c2.style.left=arrL[countB];
+c2.style.top=arrT[countB];
+turn="PB";
+turns.innerHTML="Player B's Turn!";
+}
+
+if(count==4 && def==1)
+{
+c2.style.left=arrL[countB];
+c2.style.top=arrT[countB];
+turn="PC";
+turns.innerHTML="Player C's Turn!";
+}
+
+if(count==4 && def==0)
+{
+def=1;
+c2.style.left=arrL[countB];
+c2.style.top=arrT[countB];
+turn="PB";
+turns.innerHTML="Player B's Turn!";
+}
+
+r=0;
+
+if(countB==100)
+{
+turns.innerHTML="Player B Won The Game. Congrats!!! Player B.";
+alert("Congrats!!! You Win.");
+alert("Press 'F5' Or Click 'New Game' Button To Play A New Game.");
+rol.style.display="none";
+brk.style.display="";
+}
+
+}
+
+}
+
+
+function playerC()
+{
+
+if(turn=="PC")
+turns.innerHTML="Player C's Turn!";
+
+if(flagC)
+{
+tos.style.display="none";
+rol.style.display="";
+m.value=0;
+c3.style.left=arrL[1];
+c3.style.top=arrT[1];
+flagC=false;
+countC=1;
+turn="PC";
+turns.innerHTML="Player C's Turn!";
+}
+
+else
+{
+
+countC=countC+r;
+
+if(countC>100)
+{
+countC=countC-r;
+}
+
+if(countC==6 || countC==9 || countC==19 || countC==21 || countC==28 || countC==51 || countC==72 || countC==80)
+{
+
+turn="PC";
+
+if(countC==6)
+countC=16;
+
+if(countC==9)
+countC=31;
+
+if(countC==19)
+countC=38;
+
+if(countC==21)
+countC=79;
+
+if(countC==28)
+countC=84;
+
+if(countC==51)
+countC=67;
+
+if(countC==72)
+countC=93;
+
+if(countC==80)
+countC=100;
+
+def=0;
+
+}
+
+if(countC==18 || countC==43 || countC==49 || countC==56 || countC==65 || countC==88 || countC==92 || countC==99)
+{
+
+if(countC==18)
+countC=5;
+
+if(countC==43)
+countC=23;
+
+if(countC==49)
+countC=33;
+
+if(countC==56)
+countC=26;
+
+if(countC==65)
+countC=57;
+
+if(countC==88)
+countC=53;
+
+if(countC==92)
+countC=71;
+
+if(countC==99)
+countC=35;
+
+def=1;
+
+} 
+
+if(count==3 && def==1)
+{
+c3.style.left=arrL[countC];
+c3.style.top=arrT[countC];
+turn="PA";
+turns.innerHTML="Player A's Turn!";
+}
+
+if(count==3 && def==0)
+{
+def=1;
+c3.style.left=arrL[countC];
+c3.style.top=arrT[countC];
+turn="PC";
+turns.innerHTML="Player C's Turn!";
+}
+
+if(count==4 && def==1)
+{
+c3.style.left=arrL[countC];
+c3.style.top=arrT[countC];
+turn="PD";
+turns.innerHTML="Player D's Turn!";
+}
+
+if(count==4 && def==0)
+{
+def=1;
+c3.style.left=arrL[countC];
+c3.style.top=arrT[countC];
+turn="PC";
+turns.innerHTML="Player C's Turn!";
+}
+
+r=0;
+
+if(countC==100)
+{
+turns.innerHTML="Player C Won The Game. Congrats!!! Player C.";
+alert("Congrats!!! You Win.");
+alert("Press 'F5' Or Click 'New Game' Button To Play A New Game.");
+rol.style.display="none";
+brk.style.display="";
+}
+
+}
+
+}
+
+
+function playerD()
+{
+
+if(turn=="PD")
+turns.innerHTML="Player D's Turn!";
+
+if(flagD)
+{
+tos.style.display="none";
+rol.style.display="";
+m.value=0;
+c4.style.left=arrL[1];
+c4.style.top=arrT[1];
+flagD=false;
+countD=1;
+turn="PD";
+turns.innerHTML="Player D's Turn!";
+}
+
+else
+{
+
+countD=countD+r;
+
+if(countD>100)
+{
+countD=countD-r;
+}
+
+if(countD==6 || countD==9 || countD==19 || countD==21 || countD==28 || countD==51 || countD==72 || countD==80)
+{
+
+turn="PD";
+
+if(countD==6)
+countD=16;
+
+if(countD==9)
+countD=31;
+
+if(countD==19)
+countD=38;
+
+if(countD==21)
+countD=79;
+
+if(countD==28)
+countD=84;
+
+if(countD==51)
+countD=67;
+
+if(countD==72)
+countD=93;
+
+if(countD==80)
+countD=100;
+
+def=0;
+
+}
+
+if(countD==18 || countD==43 || countD==49 || countD==56 || countD==65 || countD==88 || countD==92 || countD==99)
+{
+
+if(countD==18)
+countD=5;
+
+if(countD==43)
+countD=23;
+
+if(countD==49)
+countD=33;
+
+if(countD==56)
+countD=26;
+
+if(countD==65)
+countD=57;
+
+if(countD==88)
+countD=53;
+
+if(countD==92)
+countD=71;
+
+if(countD==99)
+countD=35;
+
+def=1;
+
+} 
+
+if(count==4 && def==1)
+{
+c4.style.left=arrL[countD];
+c4.style.top=arrT[countD];
+turn="PA";
+turns.innerHTML="Player A's Turn!";
+}
+
+if(count==4 && def==0)
+{
+def=1;
+c4.style.left=arrL[countD];
+c4.style.top=arrT[countD];
+turn="PD";
+turns.innerHTML="Player D's Turn!";
+}
+
+r=0;
+
+if(countD==100)
+{
+turns.innerHTML="Player D Won The Game. Congrats!!! Player D.";
+alert("Congrats!!! You Win.");
+alert("Press 'F5' Or Click 'New Game' Button To Play A New Game.");
+rol.style.display="none";
+brk.style.display="";
+}
+
+}
+
+}
+
+
+</script>
+
+
+<style>
+
+</style>
+
+
+</head>
+
+
+<body width="100%" height="100%" bgcolor="orange" onLoad="scrollit(100)">
+
+
+<center>
+
+<b>
+<h2>
+<font face="Arial" color="blue">
+<u>
+SNAKES & LADDERS GAME
+</u>
+</font>
+</h2>
+</b>
+
+<input style="{ position : absolute ; top : 3% ; left : 75%; }" type="button" value="Quit the Game" onclick="terminate()"/>
+
+<input style="{ position : absolute ; top : 8% ; left : 75%; }" type="button" value="Game Instructions" onclick="instruct()"/>
+
+<label>
+<h3>
+<b>
+<font color="white">
+Enter the number of players ( Min - 2  ;  Max - 4 )
+</font>
+</b>
+</h3>
+</label>
+
+<input id="n" type="text" value="2" maxlength="1" size="4"/>
+
+<input id="but" type="button" value="Submit" onclick="buttons()"/>
+
+<input id="res" type="button" value="New Game" onclick="resgame()" disabled="true"/>
+
+</center>
+
+<hr/>
+
+<center>
+<b>
+<h3>
+<font color="green">
+<div id="match" style="{display : none}">
+</div>
+</font>
+</h3>
+</b>
+</center>
+
+<div  id="rol" style="{display : none}">
+
+<center>
+
+<b>
+Roll a dice here!
+</b>
+
+<input id="ro" type="button" value="Dice" onclick="rnd1()"/>
+
+<img id="dc" src="0.gif" alt="Dice Display" width="36" height="30" />
+
+<input id="m" type="text" maxlength="1" size="2">
+
+</center>
+
+</div>
+
+<div id="tos" style="{display : none}" >
+
+<center>
+
+<b>
+Toss it!
+</b>
+
+<input type="button" value="Toss" onclick="toss()"/>
+
+</center>
+
+</div>
+
+<br/>
+
+<span id="brk" style="{display : none}">
+<br/>
+</span>
+
+<div id="sl" style="{display : none ; position : absolute ; top : 275 ; left : 250 ; }">
+<img src="image05.jpg" width="800" height="600"/>
+</div>
+
+<hr/>
+
+<div id="b1" style="{display : none ; position : absolute ; top : 900 ; left : 50 ; }">
+
+<hr/>
+
+<b>
+Player 'A' == 
+</b>
+
+<img src="image01.bmp"/>
+
+</div>
+
+<div id="b2" style="{display : none ; position : absolute ; top : 900 ; left : 200 ; }">
+
+<hr/>
+
+<b>
+Player 'B' == 
+</b>
+
+<img src="image02.bmp"/>
+
+</div>
+
+<div id="b3" style="{display : none ; position : absolute ; top : 900 ; left : 350 ; }">
+
+<hr/>
+
+<b>
+Player 'C' == 
+</b>
+
+<img src="image03.bmp"/>
+
+</div>
+
+<div id="b4" style="{display : none ; position : absolute ; top : 900 ; left : 500 ; }">
+
+<hr/>
+
+<b>
+Player 'D' == 
+</b>
+
+<img src="image04.bmp"/>
+
+</div>
+
+<b>
+<h2>
+<span id="turns" style="{position : absolute ; top : 15% ; left : 72% ; }">
+</span>
+</h2>
+</b>
+
+<div id="c1" style="{display : none ; position : absolute ; top : 600 ; left : 50 ; }">
+<img src="image01.bmp"/>
+</div>
+
+<div id="c2" style="{display : none ; position : absolute ; top : 650 ; left : 50 ; }">
+<img src="image02.bmp"/>
+</div>
+
+<div id="c3" style="{display : none ; position : absolute ; top : 700 ; left : 50 ; }">
+<img src="image03.bmp"/>
+</div>
+
+<div id="c4" style="{display : none ; position : absolute ; top : 750 ; left : 50 ; }">
+<img src="image04.bmp"/>
+</div>
+
+
+</body>
+
+
+</html>
